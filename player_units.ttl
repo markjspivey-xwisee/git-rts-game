@@ -1,0 +1,7 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+ @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+ @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+ @prefix game: <http://example.org/game#>.
+
+ game:player1 a game:Player;
+  game:units game:unit1.
