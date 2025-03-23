@@ -1,0 +1,10 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix game: <http://example.org/game#>.
+
+game:townCenter1 a game:Building;
+ game:type "townCenter";
+ game:owner game:player1;
+ game:health 500;
+ game:location "{x: 15, y: 15}".
