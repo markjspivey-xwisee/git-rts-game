@@ -9,3 +9,10 @@ game:unit1 a game:Unit;
  game:defense 5;
  game:health 100;
  game:location "{x: 25, y: 70}".
+
+game:unit2 a game:Unit;
+ game:name "Warrior";
+ game:attack 10;
+ game:defense 5;
+ game:health 100;
+ game:location "{x: 80, y: 80}".
