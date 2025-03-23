@@ -8,4 +8,4 @@ game:unit1 a game:Unit;
  game:attack 10;
  game:defense 5;
  game:health 100;
- game:location "{x: 20, y: 30}".
+ game:location "{x: 30, y: 40}".
