@@ -20,5 +20,5 @@ game:quarry1 a game:ResourceNode;
 
 game:farm1 a game:ResourceNode;
  game:type "food";
- game:amount 3000;
+ game:amount 2900;
  game:location "{x: 25, y: 70}".

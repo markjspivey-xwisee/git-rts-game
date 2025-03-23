@@ -7,4 +7,4 @@ game:player1 a game:Player;
  game:gold 200;
  game:wood 100;
  game:stone 50;
- game:food 200.
+ game:food 300.
