@@ -8,7 +8,7 @@ game:unit1 a game:Unit;
  game:attack 10;
  game:defense 5;
  game:health 100;
- game:location "{x: 5, y: 5}".
+ game:location "{x: 10, y: 10}".
 
 game:unit2 a game:Unit;
  game:name "Warrior";
