@@ -1,0 +1,81 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix game: <http://example.org/game#>.
+@prefix hydra: <http://www.w3.org/ns/hydra/core#>.
+
+game:goldMine1 a game:ResourceNode;
+  game:type "gold";
+  game:amount 1000;
+  game:location "{x: 20, y: 30}";
+  hydra:operation [
+    a hydra:Operation;
+    hydra:method "GET";
+    hydra:title "Get Resource Node Information";
+    hydra:description "Retrieves information about this resource node";
+    hydra:returns game:ResourceNode
+  ];
+  hydra:link [
+    a hydra:Link;
+    hydra:title "World";
+    hydra:description "The game world that contains this resource node";
+    hydra:property game:world;
+    hydra:target game:world
+  ].
+
+game:forest1 a game:ResourceNode;
+  game:type "wood";
+  game:amount 2000;
+  game:location "{x: 40, y: 15}";
+  hydra:operation [
+    a hydra:Operation;
+    hydra:method "GET";
+    hydra:title "Get Resource Node Information";
+    hydra:description "Retrieves information about this resource node";
+    hydra:returns game:ResourceNode
+  ];
+  hydra:link [
+    a hydra:Link;
+    hydra:title "World";
+    hydra:description "The game world that contains this resource node";
+    hydra:property game:world;
+    hydra:target game:world
+  ].
+
+game:quarry1 a game:ResourceNode;
+  game:type "stone";
+  game:amount 1500;
+  game:location "{x: 60, y: 50}";
+  hydra:operation [
+    a hydra:Operation;
+    hydra:method "GET";
+    hydra:title "Get Resource Node Information";
+    hydra:description "Retrieves information about this resource node";
+    hydra:returns game:ResourceNode
+  ];
+  hydra:link [
+    a hydra:Link;
+    hydra:title "World";
+    hydra:description "The game world that contains this resource node";
+    hydra:property game:world;
+    hydra:target game:world
+  ].
+
+game:farm1 a game:ResourceNode;
+  game:type "food";
+  game:amount 3000;
+  game:location "{x: 25, y: 70}";
+  hydra:operation [
+    a hydra:Operation;
+    hydra:method "GET";
+    hydra:title "Get Resource Node Information";
+    hydra:description "Retrieves information about this resource node";
+    hydra:returns game:ResourceNode
+  ];
+  hydra:link [
+    a hydra:Link;
+    hydra:title "World";
+    hydra:description "The game world that contains this resource node";
+    hydra:property game:world;
+    hydra:target game:world
+  ].

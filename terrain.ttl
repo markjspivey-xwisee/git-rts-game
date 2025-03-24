@@ -1,0 +1,67 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix game: <http://example.org/game#>.
+
+# Terrain grid for the game world
+# The world is divided into a grid of terrain cells
+# Each cell has a position (x, y) and a terrain type
+
+# Plains terrain (default)
+game:terrain_0_0 a game:TerrainCell;
+  game:position "{x: 0, y: 0}";
+  game:terrainType game:PlainsTerrain.
+
+game:terrain_10_10 a game:TerrainCell;
+  game:position "{x: 10, y: 10}";
+  game:terrainType game:PlainsTerrain.
+
+game:terrain_20_20 a game:TerrainCell;
+  game:position "{x: 20, y: 20}";
+  game:terrainType game:PlainsTerrain.
+
+# Forest terrain
+game:terrain_30_10 a game:TerrainCell;
+  game:position "{x: 30, y: 10}";
+  game:terrainType game:ForestTerrain.
+
+game:terrain_40_15 a game:TerrainCell;
+  game:position "{x: 40, y: 15}";
+  game:terrainType game:ForestTerrain.
+
+game:terrain_35_25 a game:TerrainCell;
+  game:position "{x: 35, y: 25}";
+  game:terrainType game:ForestTerrain.
+
+# Mountain terrain
+game:terrain_60_50 a game:TerrainCell;
+  game:position "{x: 60, y: 50}";
+  game:terrainType game:MountainTerrain.
+
+game:terrain_65_55 a game:TerrainCell;
+  game:position "{x: 65, y: 55}";
+  game:terrainType game:MountainTerrain.
+
+game:terrain_70_45 a game:TerrainCell;
+  game:position "{x: 70, y: 45}";
+  game:terrainType game:MountainTerrain.
+
+# Water terrain
+game:terrain_80_20 a game:TerrainCell;
+  game:position "{x: 80, y: 20}";
+  game:terrainType game:WaterTerrain.
+
+game:terrain_85_25 a game:TerrainCell;
+  game:position "{x: 85, y: 25}";
+  game:terrainType game:WaterTerrain.
+
+game:terrain_90_30 a game:TerrainCell;
+  game:position "{x: 90, y: 30}";
+  game:terrainType game:WaterTerrain.
+
+# Add more terrain cells as needed to fill the world
+# This is just a starting set of cells
+
+# Default terrain type for cells not explicitly defined
+game:defaultTerrain a game:DefaultTerrain;
+  game:terrainType game:PlainsTerrain.

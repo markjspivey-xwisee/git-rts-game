@@ -1,0 +1,118 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix game: <http://example.org/game#>.
+
+# Weather and time system
+game:weatherSystem a game:WeatherSystem;
+  game:currentWeather "clear";
+  game:currentTimeOfDay "day";
+  game:currentSeason "summer";
+  game:currentTurn 1;
+  game:weatherChangeInterval 10;
+  game:timeOfDayChangeInterval 5;
+  game:seasonChangeInterval 50;
+  game:nextWeatherChange 10;
+  game:nextTimeOfDayChange 5;
+  game:nextSeasonChange 50.
+
+# Weather effects
+game:clearWeather a game:Weather;
+  game:description "Clear skies";
+  game:movementModifier "1.0"^^xsd:float;
+  game:gatheringModifier "1.0"^^xsd:float;
+  game:combatModifier "1.0"^^xsd:float;
+  game:visibilityModifier "1.0"^^xsd:float.
+
+game:rainWeather a game:Weather;
+  game:description "Rainy weather";
+  game:movementModifier "0.8"^^xsd:float;
+  game:gatheringModifier "0.9"^^xsd:float;
+  game:combatModifier "0.9"^^xsd:float;
+  game:visibilityModifier "0.7"^^xsd:float.
+
+game:snowWeather a game:Weather;
+  game:description "Snowy weather";
+  game:movementModifier "0.6"^^xsd:float;
+  game:gatheringModifier "0.7"^^xsd:float;
+  game:combatModifier "0.8"^^xsd:float;
+  game:visibilityModifier "0.6"^^xsd:float.
+
+game:stormWeather a game:Weather;
+  game:description "Stormy weather";
+  game:movementModifier "0.4"^^xsd:float;
+  game:gatheringModifier "0.5"^^xsd:float;
+  game:combatModifier "0.7"^^xsd:float;
+  game:visibilityModifier "0.4"^^xsd:float.
+
+game:fogWeather a game:Weather;
+  game:description "Foggy weather";
+  game:movementModifier "0.7"^^xsd:float;
+  game:gatheringModifier "0.8"^^xsd:float;
+  game:combatModifier "0.6"^^xsd:float;
+  game:visibilityModifier "0.3"^^xsd:float.
+
+game:heatWaveWeather a game:Weather;
+  game:description "Heat wave";
+  game:movementModifier "0.7"^^xsd:float;
+  game:gatheringModifier "0.6"^^xsd:float;
+  game:combatModifier "0.8"^^xsd:float;
+  game:visibilityModifier "0.9"^^xsd:float.
+
+# Time of day effects
+game:dawnTime a game:TimeOfDay;
+  game:description "Early morning";
+  game:movementModifier "0.9"^^xsd:float;
+  game:gatheringModifier "0.8"^^xsd:float;
+  game:combatModifier "0.9"^^xsd:float;
+  game:visibilityModifier "0.7"^^xsd:float.
+
+game:dayTime a game:TimeOfDay;
+  game:description "Daytime";
+  game:movementModifier "1.0"^^xsd:float;
+  game:gatheringModifier "1.0"^^xsd:float;
+  game:combatModifier "1.0"^^xsd:float;
+  game:visibilityModifier "1.0"^^xsd:float.
+
+game:duskTime a game:TimeOfDay;
+  game:description "Evening";
+  game:movementModifier "0.9"^^xsd:float;
+  game:gatheringModifier "0.8"^^xsd:float;
+  game:combatModifier "0.9"^^xsd:float;
+  game:visibilityModifier "0.7"^^xsd:float.
+
+game:nightTime a game:TimeOfDay;
+  game:description "Nighttime";
+  game:movementModifier "0.7"^^xsd:float;
+  game:gatheringModifier "0.6"^^xsd:float;
+  game:combatModifier "0.8"^^xsd:float;
+  game:visibilityModifier "0.5"^^xsd:float.
+
+# Season effects
+game:springSeason a game:Season;
+  game:description "Spring season";
+  game:movementModifier "0.9"^^xsd:float;
+  game:gatheringModifier "1.2"^^xsd:float;
+  game:combatModifier "1.0"^^xsd:float;
+  game:visibilityModifier "1.0"^^xsd:float.
+
+game:summerSeason a game:Season;
+  game:description "Summer season";
+  game:movementModifier "1.0"^^xsd:float;
+  game:gatheringModifier "1.0"^^xsd:float;
+  game:combatModifier "1.0"^^xsd:float;
+  game:visibilityModifier "1.0"^^xsd:float.
+
+game:autumnSeason a game:Season;
+  game:description "Autumn season";
+  game:movementModifier "0.9"^^xsd:float;
+  game:gatheringModifier "1.1"^^xsd:float;
+  game:combatModifier "1.0"^^xsd:float;
+  game:visibilityModifier "0.9"^^xsd:float.
+
+game:winterSeason a game:Season;
+  game:description "Winter season";
+  game:movementModifier "0.7"^^xsd:float;
+  game:gatheringModifier "0.6"^^xsd:float;
+  game:combatModifier "0.9"^^xsd:float;
+  game:visibilityModifier "0.8"^^xsd:float.

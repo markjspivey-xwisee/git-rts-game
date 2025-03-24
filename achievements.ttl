@@ -1,0 +1,49 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix game: <http://example.org/game#>.
+
+# Achievement system
+game:achievementSystem a game:AchievementSystem;
+  game:unlockedAchievements "";
+  game:totalAchievements "5".
+
+# Resource gathering achievements
+game:achievement1 a game:Achievement;
+  game:name "Resource Baron";
+  game:description "Accumulate 1000 of each resource type";
+  game:requirements "gold:1000,wood:1000,stone:1000,food:1000";
+  game:reward "gold:500";
+  game:unlocked "false".
+
+# Unit training achievements
+game:achievement2 a game:Achievement;
+  game:name "Commander";
+  game:description "Train 20 units of any type";
+  game:requirements "units:20";
+  game:reward "hero:Commander";
+  game:unlocked "false".
+
+# Building construction achievements
+game:achievement3 a game:Achievement;
+  game:name "City Builder";
+  game:description "Construct 10 buildings of any type";
+  game:requirements "buildings:10";
+  game:reward "gold:500,wood:500,stone:500";
+  game:unlocked "false".
+
+# Exploration achievements
+game:achievement4 a game:Achievement;
+  game:name "Cartographer";
+  game:description "Explore the entire map";
+  game:requirements "cells:100";
+  game:reward "visibility:2";
+  game:unlocked "false".
+
+# Combat achievements
+game:achievement5 a game:Achievement;
+  game:name "Conqueror";
+  game:description "Defeat 50 enemy units";
+  game:requirements "defeats:50";
+  game:reward "hero:Scout";
+  game:unlocked "false".

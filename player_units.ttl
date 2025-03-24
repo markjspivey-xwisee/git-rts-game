@@ -1,7 +1,57 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
- @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
- @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
- @prefix game: <http://example.org/game#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix game: <http://example.org/game#>.
+@prefix hydra: <http://www.w3.org/ns/hydra/core#>.
 
- game:player1 a game:Player;
-  game:units game:unit1.
+game:player1 a game:Player;
+  game:units game:unit1;
+  hydra:operation [
+    a hydra:Operation;
+    hydra:method "GET";
+    hydra:title "Get Player Units";
+    hydra:description "Retrieves the units owned by this player";
+    hydra:returns hydra:Collection
+  ], [
+    a hydra:Operation;
+    hydra:method "POST";
+    hydra:title "Train New Unit";
+    hydra:description "Trains a new unit for this player";
+    hydra:expects [
+      a hydra:Class;
+      hydra:supportedProperty [
+        a hydra:SupportedProperty;
+        hydra:property game:unitType;
+        hydra:required "true"^^xsd:boolean
+      ], [
+        a hydra:SupportedProperty;
+        hydra:property game:buildingUri;
+        hydra:required "true"^^xsd:boolean
+      ]
+    ];
+    hydra:returns game:Unit
+  ];
+  hydra:collection [
+    a hydra:Collection;
+    hydra:title "Units";
+    hydra:description "The units owned by this player";
+    hydra:member game:unit1;
+    hydra:manages [
+      a hydra:IriTemplate;
+      hydra:template "http://example.org/game/player1/units{?type}";
+      hydra:variableRepresentation hydra:BasicRepresentation;
+      hydra:mapping [
+        a hydra:IriTemplateMapping;
+        hydra:variable "type";
+        hydra:property game:unitType;
+        hydra:required "false"^^xsd:boolean
+      ]
+    ]
+  ];
+  hydra:link [
+    a hydra:Link;
+    hydra:title "Resources";
+    hydra:description "The resources of this player";
+    hydra:property game:resources;
+    hydra:target game:player1
+  ].

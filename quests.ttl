@@ -1,0 +1,60 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix game: <http://example.org/game#>.
+
+# Quest system
+game:questSystem a game:QuestSystem;
+  game:activeQuests "quest1,quest2,quest3";
+  game:completedQuests "";
+  game:questRewardPool "gold:1000,wood:1000,stone:500,food:1000".
+
+# Resource gathering quests
+game:quest1 a game:Quest;
+  game:name "Resource Gatherer";
+  game:description "Gather 500 of each resource type";
+  game:type "resource_gathering";
+  game:requirements "gold:500,wood:500,stone:500,food:500";
+  game:reward "gold:200,wood:200";
+  game:completed "false";
+  game:difficulty "easy".
+
+# Unit training quests
+game:quest2 a game:Quest;
+  game:name "Army Builder";
+  game:description "Train 5 warrior units";
+  game:type "unit_training";
+  game:requirements "warrior:5";
+  game:reward "gold:300,food:200";
+  game:completed "false";
+  game:difficulty "medium".
+
+# Building construction quests
+game:quest3 a game:Quest;
+  game:name "Master Builder";
+  game:description "Construct 1 barracks and 1 tower";
+  game:type "building_construction";
+  game:requirements "barracks:1,tower:1";
+  game:reward "stone:300,wood:300";
+  game:completed "false";
+  game:difficulty "medium".
+
+# Exploration quests
+game:quest4 a game:Quest;
+  game:name "Explorer";
+  game:description "Explore at least 50 terrain cells";
+  game:type "exploration";
+  game:requirements "cells:50";
+  game:reward "gold:250,food:250";
+  game:completed "false";
+  game:difficulty "easy".
+
+# Combat quests
+game:quest5 a game:Quest;
+  game:name "Warrior";
+  game:description "Defeat 10 enemy units";
+  game:type "combat";
+  game:requirements "defeats:10";
+  game:reward "gold:500";
+  game:completed "false";
+  game:difficulty "hard".

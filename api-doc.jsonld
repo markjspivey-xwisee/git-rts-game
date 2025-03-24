@@ -1,0 +1,415 @@
+{
+  "@context": {
+    "hydra": "http://www.w3.org/ns/hydra/core#",
+    "vocab": "http://example.org/game/vocab#",
+    "ApiDocumentation": "hydra:ApiDocumentation",
+    "Class": "hydra:Class",
+    "supportedClass": "hydra:supportedClass",
+    "supportedProperty": "hydra:supportedProperty",
+    "supportedOperation": "hydra:supportedOperation",
+    "method": "hydra:method",
+    "expects": "hydra:expects",
+    "returns": "hydra:returns",
+    "statusCodes": "hydra:statusCodes",
+    "property": "hydra:property",
+    "readable": "hydra:readable",
+    "writable": "hydra:writable",
+    "required": "hydra:required",
+    "title": "hydra:title",
+    "description": "hydra:description"
+  },
+  "@id": "http://example.org/game/api-doc",
+  "@type": "ApiDocumentation",
+  "title": "Git-RTS Game API",
+  "description": "API for interacting with the Git-RTS game",
+  "supportedClass": [
+    {
+      "@id": "vocab:World",
+      "@type": "Class",
+      "title": "World",
+      "description": "The game world",
+      "supportedProperty": [
+        {
+          "property": "vocab:name",
+          "title": "name",
+          "description": "The name of the world",
+          "readable": true,
+          "writable": true,
+          "required": true
+        },
+        {
+          "property": "vocab:size",
+          "title": "size",
+          "description": "The size of the world",
+          "readable": true,
+          "writable": true,
+          "required": true
+        }
+      ],
+      "supportedOperation": [
+        {
+          "@id": "_:world_retrieve",
+          "@type": "hydra:Operation",
+          "method": "GET",
+          "title": "Retrieve world",
+          "description": "Retrieves the world information",
+          "expects": null,
+          "returns": "vocab:World",
+          "statusCodes": []
+        }
+      ]
+    },
+    {
+      "@id": "vocab:Player",
+      "@type": "Class",
+      "title": "Player",
+      "description": "A player in the game",
+      "supportedProperty": [
+        {
+          "property": "vocab:gold",
+          "title": "gold",
+          "description": "The amount of gold a player has",
+          "readable": true,
+          "writable": true,
+          "required": true
+        },
+        {
+          "property": "vocab:wood",
+          "title": "wood",
+          "description": "The amount of wood a player has",
+          "readable": true,
+          "writable": true,
+          "required": true
+        },
+        {
+          "property": "vocab:stone",
+          "title": "stone",
+          "description": "The amount of stone a player has",
+          "readable": true,
+          "writable": true,
+          "required": true
+        },
+        {
+          "property": "vocab:food",
+          "title": "food",
+          "description": "The amount of food a player has",
+          "readable": true,
+          "writable": true,
+          "required": true
+        },
+        {
+          "property": "vocab:units",
+          "title": "units",
+          "description": "The units owned by a player",
+          "readable": true,
+          "writable": true,
+          "required": false
+        }
+      ],
+      "supportedOperation": [
+        {
+          "@id": "_:player_retrieve",
+          "@type": "hydra:Operation",
+          "method": "GET",
+          "title": "Retrieve player",
+          "description": "Retrieves a player's information",
+          "expects": null,
+          "returns": "vocab:Player",
+          "statusCodes": []
+        }
+      ]
+    },
+    {
+      "@id": "vocab:Unit",
+      "@type": "Class",
+      "title": "Unit",
+      "description": "A unit in the game",
+      "supportedProperty": [
+        {
+          "property": "vocab:name",
+          "title": "name",
+          "description": "The name of the unit",
+          "readable": true,
+          "writable": true,
+          "required": true
+        },
+        {
+          "property": "vocab:attack",
+          "title": "attack",
+          "description": "The attack value of the unit",
+          "readable": true,
+          "writable": true,
+          "required": true
+        },
+        {
+          "property": "vocab:defense",
+          "title": "defense",
+          "description": "The defense value of the unit",
+          "readable": true,
+          "writable": true,
+          "required": true
+        },
+        {
+          "property": "vocab:health",
+          "title": "health",
+          "description": "The health value of the unit",
+          "readable": true,
+          "writable": true,
+          "required": true
+        },
+        {
+          "property": "vocab:location",
+          "title": "location",
+          "description": "The location of the unit",
+          "readable": true,
+          "writable": true,
+          "required": true
+        }
+      ],
+      "supportedOperation": [
+        {
+          "@id": "_:unit_retrieve",
+          "@type": "hydra:Operation",
+          "method": "GET",
+          "title": "Retrieve unit",
+          "description": "Retrieves a unit's information",
+          "expects": null,
+          "returns": "vocab:Unit",
+          "statusCodes": []
+        },
+        {
+          "@id": "_:unit_move",
+          "@type": "hydra:Operation",
+          "method": "PUT",
+          "title": "Move unit",
+          "description": "Moves a unit to a new location",
+          "expects": "vocab:MoveUnitInput",
+          "returns": "vocab:Unit",
+          "statusCodes": []
+        },
+        {
+          "@id": "_:unit_gather",
+          "@type": "hydra:Operation",
+          "method": "PUT",
+          "title": "Gather resources",
+          "description": "Makes a unit gather resources from a resource node",
+          "expects": "vocab:GatherResourcesInput",
+          "returns": "vocab:Unit",
+          "statusCodes": []
+        }
+      ]
+    },
+    {
+      "@id": "vocab:ResourceNode",
+      "@type": "Class",
+      "title": "ResourceNode",
+      "description": "A resource node in the game",
+      "supportedProperty": [
+        {
+          "property": "vocab:type",
+          "title": "type",
+          "description": "The type of the resource node",
+          "readable": true,
+          "writable": true,
+          "required": true
+        },
+        {
+          "property": "vocab:amount",
+          "title": "amount",
+          "description": "The amount of resources in the node",
+          "readable": true,
+          "writable": true,
+          "required": true
+        },
+        {
+          "property": "vocab:location",
+          "title": "location",
+          "description": "The location of the resource node",
+          "readable": true,
+          "writable": true,
+          "required": true
+        }
+      ],
+      "supportedOperation": [
+        {
+          "@id": "_:resourcenode_retrieve",
+          "@type": "hydra:Operation",
+          "method": "GET",
+          "title": "Retrieve resource node",
+          "description": "Retrieves a resource node's information",
+          "expects": null,
+          "returns": "vocab:ResourceNode",
+          "statusCodes": []
+        }
+      ]
+    },
+    {
+      "@id": "vocab:Building",
+      "@type": "Class",
+      "title": "Building",
+      "description": "A building in the game",
+      "supportedProperty": [
+        {
+          "property": "vocab:type",
+          "title": "type",
+          "description": "The type of the building",
+          "readable": true,
+          "writable": true,
+          "required": true
+        },
+        {
+          "property": "vocab:owner",
+          "title": "owner",
+          "description": "The owner of the building",
+          "readable": true,
+          "writable": true,
+          "required": true
+        },
+        {
+          "property": "vocab:health",
+          "title": "health",
+          "description": "The health value of the building",
+          "readable": true,
+          "writable": true,
+          "required": true
+        },
+        {
+          "property": "vocab:location",
+          "title": "location",
+          "description": "The location of the building",
+          "readable": true,
+          "writable": true,
+          "required": true
+        }
+      ],
+      "supportedOperation": [
+        {
+          "@id": "_:building_retrieve",
+          "@type": "hydra:Operation",
+          "method": "GET",
+          "title": "Retrieve building",
+          "description": "Retrieves a building's information",
+          "expects": null,
+          "returns": "vocab:Building",
+          "statusCodes": []
+        }
+      ]
+    },
+    {
+      "@id": "vocab:MoveUnitInput",
+      "@type": "Class",
+      "title": "MoveUnitInput",
+      "description": "Input for moving a unit",
+      "supportedProperty": [
+        {
+          "property": "vocab:unitUri",
+          "title": "unitUri",
+          "description": "The URI of the unit to move",
+          "readable": true,
+          "writable": true,
+          "required": true
+        },
+        {
+          "property": "vocab:x",
+          "title": "x",
+          "description": "The x coordinate to move to",
+          "readable": true,
+          "writable": true,
+          "required": true
+        },
+        {
+          "property": "vocab:y",
+          "title": "y",
+          "description": "The y coordinate to move to",
+          "readable": true,
+          "writable": true,
+          "required": true
+        }
+      ]
+    },
+    {
+      "@id": "vocab:GatherResourcesInput",
+      "@type": "Class",
+      "title": "GatherResourcesInput",
+      "description": "Input for gathering resources",
+      "supportedProperty": [
+        {
+          "property": "vocab:unitUri",
+          "title": "unitUri",
+          "description": "The URI of the unit to gather resources",
+          "readable": true,
+          "writable": true,
+          "required": true
+        },
+        {
+          "property": "vocab:resourceNodeUri",
+          "title": "resourceNodeUri",
+          "description": "The URI of the resource node to gather from",
+          "readable": true,
+          "writable": true,
+          "required": true
+        }
+      ]
+    },
+    {
+      "@id": "vocab:EntryPoint",
+      "@type": "Class",
+      "title": "EntryPoint",
+      "description": "The main entry point or homepage of the API",
+      "supportedProperty": [
+        {
+          "property": "vocab:world",
+          "title": "world",
+          "description": "The world",
+          "readable": true,
+          "writable": false,
+          "required": true
+        },
+        {
+          "property": "vocab:players",
+          "title": "players",
+          "description": "All players",
+          "readable": true,
+          "writable": false,
+          "required": true
+        },
+        {
+          "property": "vocab:units",
+          "title": "units",
+          "description": "All units",
+          "readable": true,
+          "writable": false,
+          "required": true
+        },
+        {
+          "property": "vocab:resourceNodes",
+          "title": "resourceNodes",
+          "description": "All resource nodes",
+          "readable": true,
+          "writable": false,
+          "required": true
+        },
+        {
+          "property": "vocab:buildings",
+          "title": "buildings",
+          "description": "All buildings",
+          "readable": true,
+          "writable": false,
+          "required": true
+        }
+      ],
+      "supportedOperation": [
+        {
+          "@id": "_:entry_point",
+          "@type": "hydra:Operation",
+          "method": "GET",
+          "title": "Get the API entry point",
+          "description": "Retrieves the API entry point",
+          "expects": null,
+          "returns": "vocab:EntryPoint",
+          "statusCodes": []
+        }
+      ]
+    }
+  ]
+}

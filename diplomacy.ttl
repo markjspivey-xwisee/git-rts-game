@@ -1,0 +1,66 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix game: <http://example.org/game#>.
+
+# Diplomacy system
+game:diplomacySystem a game:DiplomacySystem;
+  game:version "1.0";
+  game:treatyCount 0;
+  game:lastDiplomacyUpdate "2025-03-24T02:58:09.047Z".
+
+# Relation types
+game:neutralRelation a game:RelationType;
+  game:name "neutral";
+  game:description "Default neutral relationship";
+  game:visibilitySharing "false"^^xsd:boolean;
+  game:resourceSharing "false"^^xsd:boolean;
+  game:militaryAccess "false"^^xsd:boolean;
+  game:tradingBonus "0.0"^^xsd:float.
+
+game:friendlyRelation a game:RelationType;
+  game:name "friendly";
+  game:description "Friendly relationship with basic cooperation";
+  game:visibilitySharing "false"^^xsd:boolean;
+  game:resourceSharing "false"^^xsd:boolean;
+  game:militaryAccess "true"^^xsd:boolean;
+  game:tradingBonus "0.1"^^xsd:float.
+
+game:allianceRelation a game:RelationType;
+  game:name "alliance";
+  game:description "Full alliance with shared interests";
+  game:visibilitySharing "true"^^xsd:boolean;
+  game:resourceSharing "false"^^xsd:boolean;
+  game:militaryAccess "true"^^xsd:boolean;
+  game:tradingBonus "0.2"^^xsd:float.
+
+game:federationRelation a game:RelationType;
+  game:name "federation";
+  game:description "Deep federation with shared resources";
+  game:visibilitySharing "true"^^xsd:boolean;
+  game:resourceSharing "true"^^xsd:boolean;
+  game:militaryAccess "true"^^xsd:boolean;
+  game:tradingBonus "0.3"^^xsd:float.
+
+game:hostileRelation a game:RelationType;
+  game:name "hostile";
+  game:description "Hostile relationship with potential for conflict";
+  game:visibilitySharing "false"^^xsd:boolean;
+  game:resourceSharing "false"^^xsd:boolean;
+  game:militaryAccess "false"^^xsd:boolean;
+  game:tradingBonus "-0.2"^^xsd:float.
+
+game:warRelation a game:RelationType;
+  game:name "war";
+  game:description "Active state of war";
+  game:visibilitySharing "false"^^xsd:boolean;
+  game:resourceSharing "false"^^xsd:boolean;
+  game:militaryAccess "false"^^xsd:boolean;
+  game:tradingBonus "-1.0"^^xsd:float.
+
+# Player relations
+game:player1_player2_relation a game:PlayerRelation;
+  game:player1 game:player1;
+  game:player2 game:player2;
+  game:relationType "neutral";
+  game:relationSince "2025-03-24T02:58:09.047Z".

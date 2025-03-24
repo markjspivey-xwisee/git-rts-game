@@ -2,7 +2,81 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix game: <http://example.org/game#>.
+@prefix hydra: <http://www.w3.org/ns/hydra/core#>.
 
-game:world a game:World;
- game:name "My Game World";
- game:size 100.
+game:world a game:World, hydra:Resource;
+  game:name "My Game World";
+  game:size 100;
+  hydra:operation [
+    a hydra:Operation;
+    hydra:method "GET";
+    hydra:title "Get World Information";
+    hydra:description "Retrieves information about the game world";
+    hydra:returns game:World
+  ];
+  hydra:collection [
+    a hydra:Collection;
+    hydra:title "Players";
+    hydra:description "The players in this game world";
+    hydra:member game:player1;
+    hydra:manages [
+      a hydra:IriTemplate;
+      hydra:template "http://example.org/game/players{?name}";
+      hydra:variableRepresentation hydra:BasicRepresentation;
+      hydra:mapping [
+        a hydra:IriTemplateMapping;
+        hydra:variable "name";
+        hydra:property game:name;
+        hydra:required "false"^^xsd:boolean
+      ]
+    ]
+  ], [
+    a hydra:Collection;
+    hydra:title "Units";
+    hydra:description "All units in this game world";
+    hydra:member game:unit1;
+    hydra:manages [
+      a hydra:IriTemplate;
+      hydra:template "http://example.org/game/units{?type,player}";
+      hydra:variableRepresentation hydra:BasicRepresentation;
+      hydra:mapping [
+        a hydra:IriTemplateMapping;
+        hydra:variable "type";
+        hydra:property game:unitType;
+        hydra:required "false"^^xsd:boolean
+      ], [
+        a hydra:IriTemplateMapping;
+        hydra:variable "player";
+        hydra:property game:owner;
+        hydra:required "false"^^xsd:boolean
+      ]
+    ]
+  ], [
+    a hydra:Collection;
+    hydra:title "Resource Nodes";
+    hydra:description "All resource nodes in this game world";
+    hydra:manages [
+      a hydra:IriTemplate;
+      hydra:template "http://example.org/game/resource-nodes{?type}";
+      hydra:variableRepresentation hydra:BasicRepresentation;
+      hydra:mapping [
+        a hydra:IriTemplateMapping;
+        hydra:variable "type";
+        hydra:property game:type;
+        hydra:required "false"^^xsd:boolean
+      ]
+    ]
+  ];
+  hydra:link [
+    a hydra:Link;
+    hydra:title "Game Ontology";
+    hydra:description "The ontology that defines the structure of the game";
+    hydra:property rdfs:isDefinedBy;
+    hydra:target "http://example.org/game/ontology"
+  ], [
+    a hydra:Link;
+    hydra:title "API Documentation";
+    hydra:description "The API documentation for the game";
+    hydra:property hydra:apiDocumentation;
+    hydra:target "http://example.org/game/api-doc"
+  ].

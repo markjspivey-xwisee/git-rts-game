@@ -1,0 +1,289 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix hydra: <http://www.w3.org/ns/hydra/core#> .
+@prefix game: <http://example.org/game#> .
+
+# Game Ontology with Hydra Hypermedia Controls
+
+# Class definitions
+game:World a rdfs:Class, hydra:Class ;
+    rdfs:label "Game World" ;
+    rdfs:comment "The game world that contains all game entities" ;
+    hydra:supportedOperation [
+        a hydra:Operation ;
+        hydra:method "GET" ;
+        hydra:title "Get World Information" ;
+        hydra:description "Retrieves information about the game world"
+    ] .
+
+game:Player a rdfs:Class, hydra:Class ;
+    rdfs:label "Player" ;
+    rdfs:comment "A player in the game" ;
+    hydra:supportedOperation [
+        a hydra:Operation ;
+        hydra:method "GET" ;
+        hydra:title "Get Player Information" ;
+        hydra:description "Retrieves information about a player"
+    ], [
+        a hydra:Operation ;
+        hydra:method "PUT" ;
+        hydra:title "Update Player" ;
+        hydra:description "Updates player information"
+    ] .
+
+game:Unit a rdfs:Class, hydra:Class ;
+    rdfs:label "Unit" ;
+    rdfs:comment "A unit in the game" ;
+    hydra:supportedOperation [
+        a hydra:Operation ;
+        hydra:method "GET" ;
+        hydra:title "Get Unit Information" ;
+        hydra:description "Retrieves information about a unit"
+    ], [
+        a hydra:Operation ;
+        hydra:method "PUT" ;
+        hydra:title "Update Unit" ;
+        hydra:description "Updates unit information"
+    ], [
+        a hydra:Operation ;
+        hydra:method "DELETE" ;
+        hydra:title "Delete Unit" ;
+        hydra:description "Deletes a unit"
+    ], [
+        a hydra:Operation ;
+        hydra:method "POST" ;
+        hydra:title "Move Unit" ;
+        hydra:description "Moves a unit to a new position" ;
+        hydra:expects [
+            a hydra:Class ;
+            hydra:supportedProperty [
+                a hydra:SupportedProperty ;
+                hydra:property game:x ;
+                hydra:required "true"^^xsd:boolean
+            ], [
+                a hydra:SupportedProperty ;
+                hydra:property game:y ;
+                hydra:required "true"^^xsd:boolean
+            ]
+        ]
+    ], [
+        a hydra:Operation ;
+        hydra:method "POST" ;
+        hydra:title "Gather Resources" ;
+        hydra:description "Gathers resources from a resource node" ;
+        hydra:expects [
+            a hydra:Class ;
+            hydra:supportedProperty [
+                a hydra:SupportedProperty ;
+                hydra:property game:resourceNode ;
+                hydra:required "true"^^xsd:boolean
+            ]
+        ]
+    ] .
+
+game:Building a rdfs:Class, hydra:Class ;
+    rdfs:label "Building" ;
+    rdfs:comment "A building in the game" ;
+    hydra:supportedOperation [
+        a hydra:Operation ;
+        hydra:method "GET" ;
+        hydra:title "Get Building Information" ;
+        hydra:description "Retrieves information about a building"
+    ], [
+        a hydra:Operation ;
+        hydra:method "PUT" ;
+        hydra:title "Update Building" ;
+        hydra:description "Updates building information"
+    ], [
+        a hydra:Operation ;
+        hydra:method "DELETE" ;
+        hydra:title "Delete Building" ;
+        hydra:description "Deletes a building"
+    ], [
+        a hydra:Operation ;
+        hydra:method "POST" ;
+        hydra:title "Train Unit" ;
+        hydra:description "Trains a new unit at this building" ;
+        hydra:expects [
+            a hydra:Class ;
+            hydra:supportedProperty [
+                a hydra:SupportedProperty ;
+                hydra:property game:unitType ;
+                hydra:required "true"^^xsd:boolean
+            ]
+        ]
+    ] .
+
+game:ResourceNode a rdfs:Class, hydra:Class ;
+    rdfs:label "Resource Node" ;
+    rdfs:comment "A resource node in the game" ;
+    hydra:supportedOperation [
+        a hydra:Operation ;
+        hydra:method "GET" ;
+        hydra:title "Get Resource Node Information" ;
+        hydra:description "Retrieves information about a resource node"
+    ] .
+
+game:Technology a rdfs:Class, hydra:Class ;
+    rdfs:label "Technology" ;
+    rdfs:comment "A technology that can be researched" ;
+    hydra:supportedOperation [
+        a hydra:Operation ;
+        hydra:method "GET" ;
+        hydra:title "Get Technology Information" ;
+        hydra:description "Retrieves information about a technology"
+    ], [
+        a hydra:Operation ;
+        hydra:method "POST" ;
+        hydra:title "Research Technology" ;
+        hydra:description "Starts researching this technology"
+    ] .
+
+game:Alliance a rdfs:Class, hydra:Class ;
+    rdfs:label "Alliance" ;
+    rdfs:comment "An alliance between players" ;
+    hydra:supportedOperation [
+        a hydra:Operation ;
+        hydra:method "GET" ;
+        hydra:title "Get Alliance Information" ;
+        hydra:description "Retrieves information about an alliance"
+    ], [
+        a hydra:Operation ;
+        hydra:method "POST" ;
+        hydra:title "Join Alliance" ;
+        hydra:description "Joins this alliance"
+    ], [
+        a hydra:Operation ;
+        hydra:method "DELETE" ;
+        hydra:title "Leave Alliance" ;
+        hydra:description "Leaves this alliance"
+    ], [
+        a hydra:Operation ;
+        hydra:method "PUT" ;
+        hydra:title "Contribute Resources" ;
+        hydra:description "Contributes resources to this alliance" ;
+        hydra:expects [
+            a hydra:Class ;
+            hydra:supportedProperty [
+                a hydra:SupportedProperty ;
+                hydra:property game:resourceType ;
+                hydra:required "true"^^xsd:boolean
+            ], [
+                a hydra:SupportedProperty ;
+                hydra:property game:amount ;
+                hydra:required "true"^^xsd:boolean
+            ]
+        ]
+    ] .
+
+# Property definitions
+game:name a rdf:Property ;
+    rdfs:label "Name" ;
+    rdfs:comment "The name of an entity" ;
+    rdfs:domain rdfs:Resource ;
+    rdfs:range xsd:string .
+
+game:size a rdf:Property ;
+    rdfs:label "Size" ;
+    rdfs:comment "The size of the game world" ;
+    rdfs:domain game:World ;
+    rdfs:range xsd:integer .
+
+game:attack a rdf:Property ;
+    rdfs:label "Attack" ;
+    rdfs:comment "The attack value of a unit" ;
+    rdfs:domain game:Unit ;
+    rdfs:range xsd:integer .
+
+game:defense a rdf:Property ;
+    rdfs:label "Defense" ;
+    rdfs:comment "The defense value of a unit" ;
+    rdfs:domain game:Unit ;
+    rdfs:range xsd:integer .
+
+game:health a rdf:Property ;
+    rdfs:label "Health" ;
+    rdfs:comment "The health value of a unit or building" ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (game:Unit game:Building) ] ;
+    rdfs:range xsd:integer .
+
+game:location a rdf:Property ;
+    rdfs:label "Location" ;
+    rdfs:comment "The location of an entity in the game world" ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (game:Unit game:Building game:ResourceNode) ] ;
+    rdfs:range xsd:string .
+
+game:x a rdf:Property ;
+    rdfs:label "X Coordinate" ;
+    rdfs:comment "The X coordinate in the game world" ;
+    rdfs:range xsd:integer .
+
+game:y a rdf:Property ;
+    rdfs:label "Y Coordinate" ;
+    rdfs:comment "The Y coordinate in the game world" ;
+    rdfs:range xsd:integer .
+
+game:units a rdf:Property ;
+    rdfs:label "Units" ;
+    rdfs:comment "The units owned by a player" ;
+    rdfs:domain game:Player ;
+    rdfs:range game:Unit .
+
+game:gold a rdf:Property ;
+    rdfs:label "Gold" ;
+    rdfs:comment "The amount of gold a player has" ;
+    rdfs:domain game:Player ;
+    rdfs:range xsd:integer .
+
+game:wood a rdf:Property ;
+    rdfs:label "Wood" ;
+    rdfs:comment "The amount of wood a player has" ;
+    rdfs:domain game:Player ;
+    rdfs:range xsd:integer .
+
+game:stone a rdf:Property ;
+    rdfs:label "Stone" ;
+    rdfs:comment "The amount of stone a player has" ;
+    rdfs:domain game:Player ;
+    rdfs:range xsd:integer .
+
+game:food a rdf:Property ;
+    rdfs:label "Food" ;
+    rdfs:comment "The amount of food a player has" ;
+    rdfs:domain game:Player ;
+    rdfs:range xsd:integer .
+
+game:type a rdf:Property ;
+    rdfs:label "Type" ;
+    rdfs:comment "The type of an entity" ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (game:Building game:ResourceNode) ] ;
+    rdfs:range xsd:string .
+
+game:amount a rdf:Property ;
+    rdfs:label "Amount" ;
+    rdfs:comment "The amount of a resource" ;
+    rdfs:domain game:ResourceNode ;
+    rdfs:range xsd:integer .
+
+game:owner a rdf:Property ;
+    rdfs:label "Owner" ;
+    rdfs:comment "The owner of an entity" ;
+    rdfs:domain [ a owl:Class ; owl:unionOf (game:Unit game:Building) ] ;
+    rdfs:range game:Player .
+
+game:unitType a rdf:Property ;
+    rdfs:label "Unit Type" ;
+    rdfs:comment "The type of unit to train" ;
+    rdfs:range xsd:string .
+
+game:resourceNode a rdf:Property ;
+    rdfs:label "Resource Node" ;
+    rdfs:comment "A resource node to gather from" ;
+    rdfs:range game:ResourceNode .
+
+game:resourceType a rdf:Property ;
+    rdfs:label "Resource Type" ;
+    rdfs:comment "The type of resource" ;
+    rdfs:range xsd:string .

@@ -1,9 +1,58 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
- @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
- @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
- @prefix game: <http://example.org/game#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix game: <http://example.org/game#>.
+@prefix hydra: <http://www.w3.org/ns/hydra/core#>.
 
- game:unit1 a game:Unit;
+game:unit1 a game:Unit;
   game:name "Warrior";
   game:attack 10;
-  game:defense 5.
+  game:defense 5;
+  game:health 100;
+  game:location "{x: 50, y: 60}";
+  hydra:operation [
+    a hydra:Operation;
+    hydra:method "GET";
+    hydra:title "Get Unit Information";
+    hydra:description "Retrieves information about this unit";
+    hydra:returns game:Unit
+  ], [
+    a hydra:Operation;
+    hydra:method "POST";
+    hydra:title "Move Unit";
+    hydra:description "Moves this unit to a new position";
+    hydra:expects [
+      a hydra:Class;
+      hydra:supportedProperty [
+        a hydra:SupportedProperty;
+        hydra:property game:x;
+        hydra:required "true"^^xsd:boolean
+      ], [
+        a hydra:SupportedProperty;
+        hydra:property game:y;
+        hydra:required "true"^^xsd:boolean
+      ]
+    ];
+    hydra:returns game:Unit
+  ], [
+    a hydra:Operation;
+    hydra:method "POST";
+    hydra:title "Gather Resources";
+    hydra:description "Gathers resources from a resource node";
+    hydra:expects [
+      a hydra:Class;
+      hydra:supportedProperty [
+        a hydra:SupportedProperty;
+        hydra:property game:resourceNode;
+        hydra:required "true"^^xsd:boolean
+      ]
+    ];
+    hydra:returns game:Unit
+  ];
+  hydra:link [
+    a hydra:Link;
+    hydra:title "Owner";
+    hydra:description "The player who owns this unit";
+    hydra:property game:owner;
+    hydra:target game:player1
+  ].

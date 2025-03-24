@@ -1,7 +1,57 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
- @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
- @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
- @prefix game: <http://example.org/game#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix game: <http://example.org/game#>.
+@prefix hydra: <http://www.w3.org/ns/hydra/core#>.
 
- game:player1 a game:Player;
-  game:resources 100.
+game:player1 a game:Player;
+  game:gold 100;
+  game:wood 100;
+  game:stone 50;
+  game:food 200;
+  hydra:operation [
+    a hydra:Operation;
+    hydra:method "GET";
+    hydra:title "Get Player Resources";
+    hydra:description "Retrieves the resources of this player";
+    hydra:returns game:Player
+  ], [
+    a hydra:Operation;
+    hydra:method "PUT";
+    hydra:title "Update Player Resources";
+    hydra:description "Updates the resources of this player";
+    hydra:expects game:Player;
+    hydra:returns game:Player
+  ];
+  hydra:link [
+    a hydra:Link;
+    hydra:title "Units";
+    hydra:description "The units owned by this player";
+    hydra:property game:units;
+    hydra:collection [
+      a hydra:Collection;
+      hydra:manages [
+        a hydra:IriTemplate;
+        hydra:template "http://example.org/game/player1/units";
+        hydra:variableRepresentation hydra:BasicRepresentation;
+        hydra:mapping [
+          a hydra:IriTemplateMapping;
+          hydra:variable "unit";
+          hydra:property game:Unit;
+          hydra:required "false"^^xsd:boolean
+        ]
+      ]
+    ]
+  ], [
+    a hydra:Link;
+    hydra:title "Create Alliance";
+    hydra:description "Create a new alliance";
+    hydra:property game:createAlliance;
+    hydra:target "http://example.org/game/alliances/create"
+  ], [
+    a hydra:Link;
+    hydra:title "Research Technology";
+    hydra:description "Research a new technology";
+    hydra:property game:researchTechnology;
+    hydra:target "http://example.org/game/technologies"
+  ].
