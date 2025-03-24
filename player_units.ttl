@@ -4,4 +4,5 @@
 @prefix game: <http://example.org/game#>.
 
 game:player1 a game:Player;
- game:units game:unit1.
+ game:units game:unit1;
+ game:units game:unit3.

@@ -16,3 +16,9 @@ game:unit2 a game:Unit;
  game:defense 5;
  game:health 100;
  game:location "{x: 80, y: 80}".
+game:unit3 a game:Unit;
+ game:name "Commander";
+ game:attack 25;
+ game:defense 15;
+ game:health 200;
+ game:location "{x: 15, y: 15}".
