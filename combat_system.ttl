@@ -1,0 +1,98 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix game: <http://example.org/game#>.
+
+# Combat system
+game:combatSystem a game:CombatSystem;
+  game:version "1.0";
+  game:enableUnitTypeAdvantages "true";
+  game:enableFormationBonuses "true";
+  game:enableExperienceSystem "true".
+
+# Unit type advantages
+game:warriorUnit a game:UnitType;
+  game:name "warrior";
+  game:strongAgainst "archer";
+  game:weakAgainst "cavalry";
+  game:advantageMultiplier "1.5"^^xsd:float;
+  game:disadvantageMultiplier "0.7"^^xsd:float.
+
+game:archerUnit a game:UnitType;
+  game:name "archer";
+  game:strongAgainst "cavalry";
+  game:weakAgainst "warrior";
+  game:advantageMultiplier "1.5"^^xsd:float;
+  game:disadvantageMultiplier "0.7"^^xsd:float.
+
+game:cavalryUnit a game:UnitType;
+  game:name "cavalry";
+  game:strongAgainst "warrior";
+  game:weakAgainst "archer";
+  game:advantageMultiplier "1.5"^^xsd:float;
+  game:disadvantageMultiplier "0.7"^^xsd:float.
+
+game:workerUnit a game:UnitType;
+  game:name "worker";
+  game:strongAgainst "";
+  game:weakAgainst "warrior,archer,cavalry";
+  game:advantageMultiplier "1.0"^^xsd:float;
+  game:disadvantageMultiplier "0.5"^^xsd:float.
+
+# Formation types
+game:lineFormation a game:Formation;
+  game:name "line";
+  game:description "Units in a line formation";
+  game:requirements "At least 3 units in a horizontal or vertical line";
+  game:attackBonus "1.2"^^xsd:float;
+  game:defenseBonus "1.1"^^xsd:float.
+
+game:squareFormation a game:Formation;
+  game:name "square";
+  game:description "Units in a square formation";
+  game:requirements "At least 4 units forming a square";
+  game:attackBonus "1.1"^^xsd:float;
+  game:defenseBonus "1.3"^^xsd:float.
+
+game:wedgeFormation a game:Formation;
+  game:name "wedge";
+  game:description "Units in a wedge/triangle formation";
+  game:requirements "At least 3 units forming a triangle";
+  game:attackBonus "1.3"^^xsd:float;
+  game:defenseBonus "1.0"^^xsd:float.
+
+game:scatteredFormation a game:Formation;
+  game:name "scattered";
+  game:description "Units spread out";
+  game:requirements "Units not in any other formation";
+  game:attackBonus "1.0"^^xsd:float;
+  game:defenseBonus "1.0"^^xsd:float.
+
+# Experience levels
+game:recruitLevel a game:ExperienceLevel;
+  game:name "recruit";
+  game:minXP 0;
+  game:attackBonus "1.0"^^xsd:float;
+  game:defenseBonus "1.0"^^xsd:float;
+  game:healthBonus "1.0"^^xsd:float.
+
+game:veteranLevel a game:ExperienceLevel;
+  game:name "veteran";
+  game:minXP 100;
+  game:attackBonus "1.2"^^xsd:float;
+  game:defenseBonus "1.2"^^xsd:float;
+  game:healthBonus "1.1"^^xsd:float.
+
+game:eliteLevel a game:ExperienceLevel;
+  game:name "elite";
+  game:minXP 300;
+  game:attackBonus "1.4"^^xsd:float;
+  game:defenseBonus "1.3"^^xsd:float;
+  game:healthBonus "1.2"^^xsd:float.
+
+game:legendaryLevel a game:ExperienceLevel;
+  game:name "legendary";
+  game:minXP 600;
+  game:attackBonus "1.6"^^xsd:float;
+  game:defenseBonus "1.5"^^xsd:float;
+  game:healthBonus "1.3"^^xsd:float.
