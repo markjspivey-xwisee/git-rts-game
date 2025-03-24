@@ -1,0 +1,84 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix game: <http://example.org/game#>.
+
+# Economic system
+game:economicSystem a game:EconomicSystem;
+  game:version "1.0";
+  game:marketCount 0;
+  game:tradeRouteCount 0;
+  game:globalTradeVolume 0;
+  game:lastMarketUpdate "2025-03-24T02:57:55.309Z".
+
+# Resource values
+game:goldResource a game:ResourceValue;
+  game:resourceType "gold";
+  game:baseValue "1.0"^^xsd:float;
+  game:currentValue "1.0"^^xsd:float;
+  game:weight "0.5"^^xsd:float;
+  game:volatility "0.1"^^xsd:float;
+  game:description "Currency for trading and purchasing".
+
+game:woodResource a game:ResourceValue;
+  game:resourceType "wood";
+  game:baseValue "0.5"^^xsd:float;
+  game:currentValue "0.5"^^xsd:float;
+  game:weight "1.0"^^xsd:float;
+  game:volatility "0.2"^^xsd:float;
+  game:description "Used for buildings and some units".
+
+game:stoneResource a game:ResourceValue;
+  game:resourceType "stone";
+  game:baseValue "0.7"^^xsd:float;
+  game:currentValue "0.7"^^xsd:float;
+  game:weight "2.0"^^xsd:float;
+  game:volatility "0.15"^^xsd:float;
+  game:description "Used for advanced buildings and defenses".
+
+game:foodResource a game:ResourceValue;
+  game:resourceType "food";
+  game:baseValue "0.3"^^xsd:float;
+  game:currentValue "0.3"^^xsd:float;
+  game:weight "0.8"^^xsd:float;
+  game:volatility "0.3"^^xsd:float;
+  game:description "Required for unit training and maintenance".
+
+# Market types
+game:tradingPostMarket a game:MarketType;
+  game:name "trading_post";
+  game:description "Basic market for local trading";
+  game:tradingRange 20;
+  game:tradingFee "0.1"^^xsd:float;
+  game:buildCost "gold:100,wood:150,stone:50,food:0".
+
+game:marketplaceMarket a game:MarketType;
+  game:name "marketplace";
+  game:description "Advanced market with better rates";
+  game:tradingRange 40;
+  game:tradingFee "0.05"^^xsd:float;
+  game:buildCost "gold:300,wood:200,stone:150,food:0".
+
+game:tradingHubMarket a game:MarketType;
+  game:name "trading_hub";
+  game:description "Central hub for global trading";
+  game:tradingRange 100;
+  game:tradingFee "0.02"^^xsd:float;
+  game:buildCost "gold:500,wood:300,stone:300,food:0".
+
+# Trade route types
+game:caravanRoute a game:TradeRouteType;
+  game:name "caravan";
+  game:description "Basic land trade route";
+  game:capacity 100;
+  game:speed 1;
+  game:securityLevel "low";
+  game:setupCost "gold:50,wood:20,stone:0,food:30".
+
+game:merchantShipRoute a game:TradeRouteType;
+  game:name "merchant_ship";
+  game:description "Water-based trade route";
+  game:capacity 300;
+  game:speed 2;
+  game:securityLevel "medium";
+  game:setupCost "gold:200,wood:100,stone:0,food:50".
