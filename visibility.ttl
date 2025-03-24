@@ -1,0 +1,93 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix game: <http://example.org/game#>.
+
+# Visibility data for the game world
+# This file tracks which areas have been explored by which players
+# and which entities are currently visible to which players
+
+# Player visibility settings
+game:player1 a game:Player;
+  game:visibilitySettings game:player1Visibility.
+
+game:player1Visibility a game:VisibilitySettings;
+  game:fogOfWarEnabled "true"^^xsd:boolean;
+  game:defaultVisibilityRange 5.
+
+# Explored terrain cells for player1
+game:terrain_6_10 game:exploredBy game:player1.
+game:terrain_7_8 game:exploredBy game:player1.
+game:terrain_7_9 game:exploredBy game:player1.
+game:terrain_7_10 game:exploredBy game:player1.
+game:terrain_7_11 game:exploredBy game:player1.
+game:terrain_7_12 game:exploredBy game:player1.
+game:terrain_8_7 game:exploredBy game:player1.
+game:terrain_8_8 game:exploredBy game:player1.
+game:terrain_8_9 game:exploredBy game:player1.
+game:terrain_8_10 game:exploredBy game:player1.
+game:terrain_8_11 game:exploredBy game:player1.
+game:terrain_8_12 game:exploredBy game:player1.
+game:terrain_8_13 game:exploredBy game:player1.
+game:terrain_9_7 game:exploredBy game:player1.
+game:terrain_9_8 game:exploredBy game:player1.
+game:terrain_9_9 game:exploredBy game:player1.
+game:terrain_9_10 game:exploredBy game:player1.
+game:terrain_9_11 game:exploredBy game:player1.
+game:terrain_9_12 game:exploredBy game:player1.
+game:terrain_9_13 game:exploredBy game:player1.
+game:terrain_10_6 game:exploredBy game:player1.
+game:terrain_10_7 game:exploredBy game:player1.
+game:terrain_10_8 game:exploredBy game:player1.
+game:terrain_10_9 game:exploredBy game:player1.
+game:terrain_10_10 game:exploredBy game:player1.
+game:terrain_10_11 game:exploredBy game:player1.
+game:terrain_10_12 game:exploredBy game:player1.
+game:terrain_10_13 game:exploredBy game:player1.
+game:terrain_10_14 game:exploredBy game:player1.
+game:terrain_11_7 game:exploredBy game:player1.
+game:terrain_11_8 game:exploredBy game:player1.
+game:terrain_11_9 game:exploredBy game:player1.
+game:terrain_11_10 game:exploredBy game:player1.
+game:terrain_11_11 game:exploredBy game:player1.
+game:terrain_11_12 game:exploredBy game:player1.
+game:terrain_11_13 game:exploredBy game:player1.
+game:terrain_12_7 game:exploredBy game:player1.
+game:terrain_12_8 game:exploredBy game:player1.
+game:terrain_12_9 game:exploredBy game:player1.
+game:terrain_12_10 game:exploredBy game:player1.
+game:terrain_12_11 game:exploredBy game:player1.
+game:terrain_12_12 game:exploredBy game:player1.
+game:terrain_12_13 game:exploredBy game:player1.
+game:terrain_13_8 game:exploredBy game:player1.
+game:terrain_13_9 game:exploredBy game:player1.
+game:terrain_13_10 game:exploredBy game:player1.
+game:terrain_13_11 game:exploredBy game:player1.
+game:terrain_13_12 game:exploredBy game:player1.
+game:terrain_14_10 game:exploredBy game:player1.
+# Initially, only the starting area is explored
+
+
+
+
+
+
+
+
+
+
+# Currently visible entities for player1
+game:unit1 game:visibleTo game:player1.
+# This is updated dynamically based on unit positions
+
+
+
+# Default visibility ranges for different unit types
+game:WarriorUnit game:defaultVisibilityRange 4.
+game:ArcherUnit game:defaultVisibilityRange 6.
+game:CavalryUnit game:defaultVisibilityRange 5.
+game:WorkerUnit game:defaultVisibilityRange 3.
+game:ScoutUnit game:defaultVisibilityRange 8.
+
+# Individual unit visibility ranges (can be modified by items or abilities)
+game:unit1 game:visibilityRange 4.

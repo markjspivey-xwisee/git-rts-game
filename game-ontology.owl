@@ -1,0 +1,227 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix game: <http://example.org/game#> .
+
+# Ontology Declaration
+<http://example.org/game> a owl:Ontology ;
+    rdfs:label "Git-RTS Game Ontology" ;
+    rdfs:comment "An ontology for the Git-RTS game" .
+
+# Classes
+game:Entity a owl:Class ;
+    rdfs:label "Entity" ;
+    rdfs:comment "Base class for all game entities" .
+
+game:World a owl:Class ;
+    rdfs:subClassOf game:Entity ;
+    rdfs:label "World" ;
+    rdfs:comment "The game world" .
+
+game:Player a owl:Class ;
+    rdfs:subClassOf game:Entity ;
+    rdfs:label "Player" ;
+    rdfs:comment "A player in the game" .
+
+game:Unit a owl:Class ;
+    rdfs:subClassOf game:Entity ;
+    rdfs:label "Unit" ;
+    rdfs:comment "A unit in the game" .
+
+game:ResourceNode a owl:Class ;
+    rdfs:subClassOf game:Entity ;
+    rdfs:label "Resource Node" ;
+    rdfs:comment "A resource node in the game" .
+
+game:Building a owl:Class ;
+    rdfs:subClassOf game:Entity ;
+    rdfs:label "Building" ;
+    rdfs:comment "A building in the game" .
+
+game:Resource a owl:Class ;
+    rdfs:label "Resource" ;
+    rdfs:comment "A resource type in the game" .
+
+game:Terrain a owl:Class ;
+    rdfs:subClassOf game:Entity ;
+    rdfs:label "Terrain" ;
+    rdfs:comment "A terrain type in the game that affects movement, resource gathering, and combat" .
+
+
+game:Visibility a owl:Class ;
+    rdfs:subClassOf game:Entity ;
+    rdfs:label "Visibility" ;
+    rdfs:comment "Represents the visibility status of areas in the game world" .
+
+
+# Properties
+game:name a owl:DatatypeProperty ;
+    rdfs:domain game:Entity ;
+    rdfs:range xsd:string ;
+    rdfs:label "name" ;
+    rdfs:comment "The name of an entity" .
+
+game:size a owl:DatatypeProperty ;
+    rdfs:domain game:World ;
+    rdfs:range xsd:integer ;
+    rdfs:label "size" ;
+    rdfs:comment "The size of the world" .
+
+game:location a owl:DatatypeProperty ;
+    rdfs:domain game:Entity ;
+    rdfs:range xsd:string ;
+    rdfs:label "location" ;
+    rdfs:comment "The location of an entity in the world" .
+
+game:attack a owl:DatatypeProperty ;
+    rdfs:domain game:Unit ;
+    rdfs:range xsd:integer ;
+    rdfs:label "attack" ;
+    rdfs:comment "The attack value of a unit" .
+
+game:defense a owl:DatatypeProperty ;
+    rdfs:domain game:Unit ;
+    rdfs:range xsd:integer ;
+    rdfs:label "defense" ;
+    rdfs:comment "The defense value of a unit" .
+
+game:health a owl:DatatypeProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (game:Unit game:Building)
+    ] ;
+    rdfs:range xsd:integer ;
+    rdfs:label "health" ;
+    rdfs:comment "The health value of a unit or building" .
+
+game:type a owl:DatatypeProperty ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf (game:ResourceNode game:Building)
+    ] ;
+    rdfs:range xsd:string ;
+    rdfs:label "type" ;
+    rdfs:comment "The type of a resource node or building" .
+
+game:amount a owl:DatatypeProperty ;
+    rdfs:domain game:ResourceNode ;
+    rdfs:range xsd:integer ;
+    rdfs:label "amount" ;
+    rdfs:comment "The amount of resources in a resource node" .
+
+game:owner a owl:ObjectProperty ;
+    rdfs:domain game:Building ;
+    rdfs:range game:Player ;
+    rdfs:label "owner" ;
+    rdfs:comment "The owner of a building" .
+
+game:units a owl:ObjectProperty ;
+    rdfs:domain game:Player ;
+    rdfs:range game:Unit ;
+    rdfs:label "units" ;
+    rdfs:comment "The units owned by a player" .
+
+game:gold a owl:DatatypeProperty ;
+    rdfs:domain game:Player ;
+    rdfs:range xsd:integer ;
+    rdfs:label "gold" ;
+    rdfs:comment "The amount of gold a player has" .
+
+game:wood a owl:DatatypeProperty ;
+    rdfs:domain game:Player ;
+    rdfs:range xsd:integer ;
+    rdfs:label "wood" ;
+    rdfs:comment "The amount of wood a player has" .
+
+game:stone a owl:DatatypeProperty ;
+    rdfs:domain game:Player ;
+    rdfs:range xsd:integer ;
+    rdfs:label "stone" ;
+    rdfs:comment "The amount of stone a player has" .
+
+game:food a owl:DatatypeProperty ;
+    rdfs:domain game:Player ;
+    rdfs:range xsd:integer ;
+    rdfs:label "food" ;
+    rdfs:comment "The amount of food a player has" .
+
+game:terrainType a owl:DatatypeProperty ;
+    rdfs:domain game:Terrain ;
+    rdfs:range xsd:string ;
+    rdfs:label "terrainType" ;
+    rdfs:comment "The type of terrain (plains, forest, mountain, water)" .
+
+game:movementModifier a owl:DatatypeProperty ;
+    rdfs:domain game:Terrain ;
+    rdfs:range xsd:float ;
+    rdfs:label "movementModifier" ;
+    rdfs:comment "How terrain affects movement speed (1.0 = normal)" .
+
+game:gatheringModifier a owl:DatatypeProperty ;
+    rdfs:domain game:Terrain ;
+    rdfs:range xsd:float ;
+    rdfs:label "gatheringModifier" ;
+    rdfs:comment "How terrain affects resource gathering (1.0 = normal)" .
+
+game:combatModifier a owl:DatatypeProperty ;
+    rdfs:domain game:Terrain ;
+    rdfs:range xsd:float ;
+    rdfs:label "combatModifier" ;
+    rdfs:comment "How terrain affects combat effectiveness (1.0 = normal)" .
+
+game:exploredBy a owl:ObjectProperty ;
+    rdfs:domain game:TerrainCell ;
+    rdfs:range game:Player ;
+    rdfs:label "exploredBy" ;
+    rdfs:comment "Which player has explored this terrain cell" .
+
+game:visibleTo a owl:ObjectProperty ;
+    rdfs:domain game:Entity ;
+    rdfs:range game:Player ;
+    rdfs:label "visibleTo" ;
+    rdfs:comment "Which player can currently see this entity" .
+
+game:visibilityRange a owl:DatatypeProperty ;
+    rdfs:domain game:Unit ;
+    rdfs:range xsd:integer ;
+    rdfs:label "visibilityRange" ;
+    rdfs:comment "How far a unit can see (in grid cells)" .
+
+# Resource Types (Individuals)
+game:GoldResource a game:Resource ;
+    rdfs:label "Gold" .
+
+game:WoodResource a game:Resource ;
+    rdfs:label "Wood" .
+
+game:StoneResource a game:Resource ;
+    rdfs:label "Stone" .
+
+game:FoodResource a game:Resource ;
+    rdfs:label "Food" .
+
+# Terrain Types (Individuals)
+game:PlainsTerrain a game:Terrain ;
+    rdfs:label "Plains" ;
+    game:movementModifier "1.0"^^xsd:float ;
+    game:gatheringModifier "1.0"^^xsd:float ;
+    game:combatModifier "1.0"^^xsd:float .
+
+game:ForestTerrain a game:Terrain ;
+    rdfs:label "Forest" ;
+    game:movementModifier "0.7"^^xsd:float ;
+    game:gatheringModifier "1.2"^^xsd:float ;
+    game:combatModifier "0.8"^^xsd:float .
+
+game:MountainTerrain a game:Terrain ;
+    rdfs:label "Mountain" ;
+    game:movementModifier "0.5"^^xsd:float ;
+    game:gatheringModifier "0.8"^^xsd:float ;
+    game:combatModifier "1.2"^^xsd:float .
+
+game:WaterTerrain a game:Terrain ;
+    rdfs:label "Water" ;
+    game:movementModifier "0.3"^^xsd:float ;
+    game:gatheringModifier "0.5"^^xsd:float ;
+    game:combatModifier "0.6"^^xsd:float .
